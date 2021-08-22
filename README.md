@@ -1,12 +1,12 @@
 # Determine maximum MTU
 
-(Originally published on 2020-02-14 on my blog)[https://earlruby.org/2020/02/determine-maximum-mtu/]
+[Originally published on 2020-02-14 on my blog](https://earlruby.org/2020/02/determine-maximum-mtu/)
 
 I first started paying attention to network MTU settings when I was building petabyte-scale object storage systems. Tuning the network that backs your storage requires maximizing the size of the data packets and verifying that packets aren’t being fragmented. Currently I’m working on performance tuning the processing of image data using racks of GPU servers and verifying the network MTU came up again. I dug up a script I’d used before and thought I’d share it in case other people run into the same problem.
 
 You can set the host network interface’s MTU setting to 9000 on all of the hosts in your network to enable jumbo frames, but how can you verify that the settings are working? If you’ve set up servers in a cloud environment using multiple availability zones or multiple regions, how can you verify that there isn’t a switch somewhere in the middle of your connection that doesn’t support MTU 9000 and fragments your packets?
 
-Use the (max-mtu.sh)[https://github.com/earlruby/maximum-mtu/blob/main/max-mtu.sh] shell script.
+Use the [max-mtu.sh](https://github.com/earlruby/maximum-mtu/blob/main/max-mtu.sh) shell script.
 
 - `-s` $size sets the size of the packet being sent.
 - `-M` do prohibits fragmentation, so ping fails if the packet fragments.
