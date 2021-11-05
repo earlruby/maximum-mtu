@@ -5,7 +5,7 @@
 
 # Usage: max-mtu.sh $target_host
 
-if ! which -s ping; then
+if ! which ping > /dev/null 2>&1; then
     echo "ping is not installed"
     exit 1
 fi
