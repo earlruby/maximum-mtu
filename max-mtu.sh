@@ -13,12 +13,12 @@ fi
 target_host=$1
 size=1272
 
-if ! ping -c1 $target_host >&/dev/null; then
+if ! ping -c1 "$target_host" >&/dev/null; then
    echo "$target_host does not respond to ping"
    exit 1
 fi
 
-if ping -s $size -M do -c1 $target_host >&/dev/null; then
+if ping -s $size -M "do" -c1 "$target_host" >&/dev/null; then
    # GNU ping
    nofragment='-M do'
 else
@@ -26,7 +26,7 @@ else
    nofragment='-D'
 fi
 
-while ping -s $size $nofragment -c1 $target_host >&/dev/null; do
+while ping -s $size $nofragment -c1 "$target_host" >&/dev/null; do
     ((size+=4));
 done
 echo "Max MTU size to $target_host: $((size-4+28))"
